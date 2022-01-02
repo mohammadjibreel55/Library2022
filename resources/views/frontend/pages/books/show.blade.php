@@ -62,13 +62,20 @@
 
 
           </p>
+          @if (Auth::check())
           <a class="btn btn-primary" target="_blank" href="{{ asset('b/books/'.$book->bookFile) }}">Download E-book</a>
-          <a class="btn btn-primary" target="_blank" href="{{ route('chatify') }}">Exchange the book from the Chat</a>
 
 
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Rate the book
           </button>
+@else
+<button class="btn btn-primary" disabled  target="_blank" href="{{ asset('b/books/'.$book->bookFile) }}">Download E-book</button>
+<button class="btn btn-primary" disabled target="_blank" href="{{ route('chatify') }}">Exchange the book from the Chat</button>
+<div class="alert alert-warning m-auto mt-4 ">To download the book and exchange books through chat, you must  <a class="font-weight-bold " href="{{route('login')}}">Login</a></div>
+
+          @endif
+
 
 
           {{-- <div class="book-buttons mt-4"> --}}

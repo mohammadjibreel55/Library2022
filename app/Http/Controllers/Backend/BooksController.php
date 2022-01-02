@@ -11,6 +11,7 @@ use App\Publisher;
 use App\Book;
 use App\BookAuthor;
 use App\Translator;
+use Illuminate\Support\Facades\Auth;
 
 class BooksController extends Controller
 {
@@ -97,7 +98,7 @@ class BooksController extends Controller
         $book->publisher_id = $request->publisher_id;
         $book->publish_year = $request->publish_year;
         $book->description = $request->description;
-        $book->user_id = 1;
+        $book->user_id = Auth::id();
         $book->is_approved = 1;
         $book->isbn = $request->isbn;
         $book->translator_id = $request->translator_id;
@@ -163,7 +164,7 @@ class BooksController extends Controller
         $publishers = Publisher::all();
         $authors = Author::all();
         $books = Book::where('is_approved', 1)->where('id', '!=', $id)->get();
-        
+
         return view('backend.pages.books.edit', compact('categories', 'publishers', 'authors', 'books', 'book'));
     }
 

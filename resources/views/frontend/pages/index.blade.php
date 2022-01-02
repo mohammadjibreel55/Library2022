@@ -57,7 +57,7 @@
           <img src="assetsfront/img/about.jpg" class="img-fluid" alt="">
         </div>
         <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-          <h3>Welcome to Balqa Applied University library</h3>
+          <h3>Welcome to Al- Balqa' Applied University  library</h3>
           <p class="fst-italic">
             here we provide e-books for all students in all universities colleges
           </p>
@@ -117,12 +117,16 @@
   </section>
 
 
+<div style="margin-left:25%">
+    <iframe   src="https://www.youtube.com/embed/ixPhYKcAzJI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen width="800px" height="500px"></iframe>
 
 
+
+</div>
 
 
     <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts section-bg">
+    <section id="counts" class="counts section-bg mt-5">
         <div class="container">
 
           <div class="row counters">

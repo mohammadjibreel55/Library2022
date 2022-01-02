@@ -125,8 +125,8 @@ class DashboardsController extends Controller
         $book->publisher_id = $request->publisher_id;
         $book->publish_year = $request->publish_year;
         $book->description = $request->description;
-        // $book->user_id = 1;
-        // $book->is_approved = 1;
+        $book->user_id = Auth::id();
+        $book->is_approved = 0;
         $book->isbn = $request->isbn;
         $book->quantity = $request->quantity;
         $book->translator_id = $request->translator_id;

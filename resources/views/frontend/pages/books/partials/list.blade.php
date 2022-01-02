@@ -5,13 +5,22 @@
         <img src="{{ asset('images/books/'.$book->image) }}" alt="" width="200px" height="300px" class="mt-5 p2">
         <div class="book-short-info">
           <h5>{{ $book->title }}</h5>
-          <p>
+          {{-- <p>
             <a href="{{ route('users.profile', $book->user->username) }}" class=""><i class="fa fa-upload"></i> {{ $book->user->name }}</a>
-          </p>
 
-
+          </p> --}}
 
           @if (Route::is('users.dashboard.books'))
+          <p>
+            Book Status
+          </p>
+
+          @if ($book->is_approved)
+          <div class="badge badge-success p-2 mb-3"> approved</div><br>
+          @else
+          <div class="badge badge-danger w-10 p-2 mb-3"> un approved</div><br>
+
+            @endif
             <a href="{{ route('books.show', $book->slug) }}" class="btn btn-outline-primary"><i class="fa fa-eye"></i></a>
 
             <a href="{{ route('users.dashboard.books.edit', $book->slug) }}" class="btn btn-outline-success"><i class="fa fa-edit"></i></a>
@@ -49,6 +58,9 @@
               </div>
             </div>
             <!-- Delete Modal -->
+
+
+
 
           @else
 

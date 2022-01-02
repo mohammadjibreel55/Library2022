@@ -15,8 +15,11 @@ use App\Translator;
 
 class BooksController extends Controller
 {
+
+
     public function show($slug)
     {
+
     	$book = Book::where('slug', $slug)->first();
 
 

@@ -7,7 +7,7 @@
   <div class="login-area page-area">
     <div class="container">
       <div class="row">
-          <div class="col-md-8 p-1">
+          <div class="col-md-8 p-2">
             <div class="profile-tab border p-2">
               <h3 class="">
                 My Uploaded Books
@@ -24,7 +24,7 @@
             </div>
           </div>
 
-          <div class="col-md-4 p-1">
+          <div class="col-md-4 p-2 m-20">
             @include('frontend.pages.users.partials.sidebar')
           </div>
 
@@ -33,4 +33,5 @@
   </div>
 
 </div>
+<div style="margin-bottom:500px"></div>
 @endsection
