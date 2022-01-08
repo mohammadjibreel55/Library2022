@@ -76,14 +76,17 @@ class BooksController extends Controller
             'slug' => 'nullable|unique:books',
             'description' => 'nullable',
             'image' => 'required|image|max:2048',
-            'bookFile' => 'required|File|max:20480',
-
-            'quantity' => 'required|numeric|min:1'
+            'bookFile' => 'nullable|File|max:20480',
+            'isbn'=>'required|max:10:unique:isbn,10',
+            // 'quantity' => 'nullabel|min:1'
         ],
         [
             'title.required' => 'Please give book title',
             'image.max' => 'Image size can not be greater than 2MB',
-            'bookFile'=>'File size can not be greater than 20MB'
+            'bookFile'=>'File size can not be greater than 20MB',
+            'isbn.max'=>'isbn must be 10 unique number '
+
+
         ]);
 
         $book = new Book();
@@ -101,8 +104,8 @@ class BooksController extends Controller
         $book->user_id = Auth::id();
         $book->is_approved = 1;
         $book->isbn = $request->isbn;
-        $book->translator_id = $request->translator_id;
-        $book->quantity = $request->quantity;
+        $book->translator_id = 1;
+        // $book->quantity = 1;
         $book->save();
 
         // Image Upload
@@ -135,7 +138,7 @@ class BooksController extends Controller
         }
 
 
-        session()->flash('success', 'Book has been created !!');
+        session()->flash('success', 'The book has been uploaded to the admin for review and approval !!');
         return redirect()->route('admin.books.index');
     }
 
@@ -165,7 +168,9 @@ class BooksController extends Controller
         $authors = Author::all();
         $books = Book::where('is_approved', 1)->where('id', '!=', $id)->get();
 
-        return view('backend.pages.books.edit', compact('categories', 'publishers', 'authors', 'books', 'book'));
+        $translators=Translator::all();
+
+        return view('backend.pages.books.edit', compact('categories', 'publishers', 'authors', 'books', 'book','translators'));
     }
 
     /**
@@ -186,8 +191,8 @@ class BooksController extends Controller
             'slug' => 'nullable|unique:books,slug,'.$book->id,
             'description' => 'nullable',
             'image' => 'nullable|image|max:2048',
-            'quantity' => 'required|numeric|min:1',
-            'BookFile'=>'required|File|max:20048',
+            // 'quantity' => 'nullable|numeric|min:1',
+            'BookFile'=>'nullable|File|max:20048',
         ],
         [
             'title.required' => 'Please give book title',
@@ -208,9 +213,9 @@ class BooksController extends Controller
         $book->publish_year = $request->publish_year;
         $book->description = $request->description;
         $book->isbn = $request->isbn;
-        $book->quantity = $request->quantity;
-        $book->translator_id = $request->translator_id;
-        $book->quantity = $request->quantity;
+        // $book->quantity = 1;
+        $book->translator_id = 1;
+        // $book->quantity = 1;
         $book->save();
 
         // Image Upload

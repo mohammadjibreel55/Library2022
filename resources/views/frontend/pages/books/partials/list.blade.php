@@ -64,28 +64,15 @@
 
           @else
 
-            <a href="{{ route('books.show', $book->slug) }}" class="btn btn-outline-primary"><i class="fa fa-eye"></i> View</a>
+         @if (Auth::check())
+         <a href="{{ route('books.show', $book->slug) }}" class="btn btn-outline-primary"><i class="fa fa-eye"></i> View</a>
 
+         <a href="{{route('wish',$book->id)}}" onclick="myFunction()" class="btn btn-outline-danger"><i class="fa fa-heart"></i> Wishlist</a>
 
+         @else
+         <a href="{{ route('books.show', $book->slug) }}" class="btn btn-outline-primary m-auto"><i class="fa fa-eye"></i> View</a>
 
-
-
-            <script>
-                function myFunction() {
-                  let text = "do you want add the book to the wishlist?.";
-                  if (confirm(text) == true) {
-                    text = "add successfully";
-                  } else {
-                    text = "You canceled!";
-                  }
-                  document.getElementById("demo").innerHTML = text;
-                  alert(text);
-                }
-                </script>
-
-
-
-            <a href="{{route('wish',$book->id)}}" onclick="myFunction()" class="btn btn-outline-danger"><i class="fa fa-heart"></i> Wishlist</a>
+         @endif
 
 
           @endif

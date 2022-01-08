@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -21,6 +19,20 @@ class UserController extends Controller
     public function create(Request $request){
         session()->flash('status', 'You are now registered !! Please confirm your email address !!');
 
+        $request->validate([
+            'name' => 'required|max:50',
+            'username'=>'required|max:50',
+            'email' => 'required',
+            'password' => 'required',
+            'phone_no' => 'required|max:10:min:10',
+
+
+        ],
+        ['phone_no.min'=>' The phone number must be 10 digits only and start with 078 or 079 or 077',
+        'phone_no.max'=>' The phone number must be 10 digits only and start with 078 or 079 or 077']
+
+
+);
         return  User::create([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -38,12 +50,20 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|max:50',
-            'username'=>'required|max:50',
-            'email' => 'required',
+            'username'=>'required|max:50','unique:users,username',
+            'email' => 'required|unique:users',
             'password' => 'required',
-            'phone_no' => 'required',
+            'phone_no' => 'required|max:10:min:10|unique:users',
 
-]);
+
+        ],
+        ['phone_no.min'=>' The phone number must be 10 digits only and start with 078 or 079 or 077',
+        'phone_no.max'=>' The phone number must be 10 digits only and start with 078 or 079 or 077',
+
+        ]
+
+
+);
 
         // $User = new User();
         // $User->name = $request->name;
@@ -52,6 +72,8 @@ class UserController extends Controller
         // $User->password = $request->password;
         // $User->phone_no= $request->phone_no;
         // $User->save();
+
+
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -83,8 +105,11 @@ class UserController extends Controller
             'name' => 'required|max:50',
             'username'=>'required|max:50',
             'email' => 'required|nullable',
-            'phone_no' => 'required|nullable',
-        ]);
+            'phone_no' => 'required|max:10:min:10'],
+            ['phone_no.min'=>' The phone number must be 10 digits only and start with 078 or 079 or 077',
+            'phone_no.max'=>' The phone number must be 10 digits only and start with 078 or 079 or 077']
+
+        );
 
         $User = User::find($id);
         $User->name = $request->name;

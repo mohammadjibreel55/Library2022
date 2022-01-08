@@ -12,9 +12,10 @@ use App\Category;
 use App\BookAuthor;
 use App\Author;
 use App\BookRequest;
+use App\Models\ChMessage;
+use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use App\User;
 
 
 class DashboardsController extends Controller
@@ -27,8 +28,14 @@ class DashboardsController extends Controller
     public function index()
     {
     	$user = Auth::user();
+        $total_wishlist=count(Wishlist::where('user_id',Auth::id())->get());
+        $total_approve=count(Book::where('is_approved', 1)->where('id',Auth::id())->get());
+        $total_unapprove=count(Book::where('is_approved', 0)->where('id',Auth::id())->get());
+
+        $total_rating =count(auth()->user()->reviews()->get());
+
     	if (!is_null($user)) {
-    		return view('frontend.pages.users.dashboard', compact('user'));
+    		return view('frontend.pages.users.dashboard', compact('user','total_wishlist','total_rating','total_approve','total_unapprove'));
     	}
     	return redirect()->route('index');
     }
@@ -128,8 +135,8 @@ class DashboardsController extends Controller
         $book->user_id = Auth::id();
         $book->is_approved = 0;
         $book->isbn = $request->isbn;
-        $book->quantity = $request->quantity;
-        $book->translator_id = $request->translator_id;
+        $book->quantity = 1;
+        $book->translator_id = 1;
         $book->save();
 
         // Image Upload
@@ -167,7 +174,7 @@ class DashboardsController extends Controller
             $book_author->save();
         }
 
-        session()->flash('success', 'Book has been updated !!');
+        session()->flash('success', 'The book has been updated and has been sent to the admin for review and approval of the update!!');
         return redirect()->route('users.dashboard.books');
     }
 

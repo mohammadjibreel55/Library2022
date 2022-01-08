@@ -34,6 +34,15 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:50',
+            'username'=>'required|max:50',
+            'email' => 'required|nullable',
+            'phone_no' => 'required|size:10'],
+
+            ['phone_no.size'=>' The phone number must be 10 digits only and start with 078 or 079 or 077']
+
+        );
         Admin::create([
             'username' => $request['username'],
             'email' => $request['email'],
@@ -42,14 +51,7 @@ class AdminController extends Controller
 
             'password' => Hash::make($request['password']),
         ]);
-        $request->validate([
-            'username' => 'required|max:50',
-            'name'=>'required|max:50',
-            'email' => 'required',
-            'password' => 'required',
-            'phone_no' => 'required',
 
-]);
         // $Admin = new Admin();
         // $Admin->name = $request->name;
         // $Admin->username=$request->username;
@@ -80,8 +82,11 @@ class AdminController extends Controller
             'name' => 'required|max:50',
             'username'=>'required|max:50',
             'email' => 'required|nullable',
-            'phone_no' => 'required|nullable',
-        ]);
+            'phone_no' => 'required|max:10:min:10'],
+            ['phone_no.min'=>' The phone number must be 10 digits only and start with 078 or 079 or 077',
+            'phone_no.max'=>' The phone number must be 10 digits only and start with 078 or 079 or 077']
+
+        );
 
         $Admin = Admin::find($id);
         $Admin->name = $request->name;

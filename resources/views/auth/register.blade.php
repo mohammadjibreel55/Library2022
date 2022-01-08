@@ -17,12 +17,15 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-4">
-                    <div class="login-wrap p-0">
+                    <div class="login-wrap">
                         @if ($errors->any())
-                        <div class="alert alert-light">
+                        <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
-                                    <li class="alert alert-light">{{ $error }}</li>
+                                <div class="alert alert-danger" role="alert">
+                                   {{$error}}
+                                  </div>
+
                                 @endforeach
                             </ul>
                         </div>
@@ -52,7 +55,7 @@
                                             @enderror
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your phone number" class="form-control @error('phone_no') is-invalid @enderror" name="phone_no" value="{{ old('phone_no') }}" required autocomplete="phone_no" id="phone_no">
+            <input type="text" class="form-control" id="phone no" aria-describedby="emailHelp" placeholder="Enter your phone number" class="form-control @error('phone_no') is-invalid @enderror" name="phone_no" value="{{ old('phone_no') }}" required autocomplete="phone_no" id="phone_no">
 
 
             @error('phone_no')

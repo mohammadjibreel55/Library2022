@@ -17,6 +17,20 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    public function reviews() {
+        return $this->hasMany(Review::class);
+
+     }
+     public function wishlists() {
+        return $this->hasMany(Wishlist::class);
+
+     }
+
+
+
+
+
     protected $fillable = [
         'username',
         'name',

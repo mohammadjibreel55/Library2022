@@ -48,14 +48,26 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+
+            return Validator::make($data, [
             'name' => ['required', 'string', 'max:190'],
             'username' => ['required', 'string', 'alpha_num', 'max:190', 'unique:users'],
-            'phone_no' => ['required', 'numeric', 'unique:users'],
+            'phone_no' => ['required','unique:users','max:10','min:10'],
+
             'email' => ['required', 'string', 'email', 'max:190', 'unique:users'],
+
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            ['username.unique'=>'already exist']
+        ],
+
+
+
+    );
+
+
     }
+
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -66,7 +78,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
+
+
         session()->flash('status', 'You are now registered !! Please confirm your email address !!');
+
 
         return  User::create([
             'name' => $data['name'],

@@ -22,12 +22,13 @@ class RatingController extends Controller
         $user_rating = DB::table('users')
                ->select('users.name', 'users.username')
                ->Join('reviews', 'users.id', '=', 'reviews.user_id')
-               ->orderBy('users.id', 'ASC')->get();
+               ->orderBy('users.id', 'ASC')->distinct()->get();
 
                $book_rating = DB::table('books')
                ->select('books.title')
                ->Join('reviews', 'books.id', '=', 'reviews.book_id')
                ->orderBy('books.id', 'ASC')->distinct()->get();
+
 
         return view('backend.pages.rating.index', compact('rating','user_rating','book_rating'));
     }
@@ -50,7 +51,7 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**

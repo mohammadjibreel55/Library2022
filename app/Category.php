@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Book;
 class Category extends Model
 {
     public function parent_category($parent_id)

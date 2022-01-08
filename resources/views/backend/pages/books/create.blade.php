@@ -88,24 +88,24 @@
                       <input type="file" name="bookFile" id="image" class="form-control" required>
                   </div>
 
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <label for="translator_id">Book Translator</label>
                     <br>
                      <select name="translator_id" id="translator_id" class="form-control select2">
                       <option value="">Select a translator book</option>
 
-                      @foreach ($translators as $t)
+                      @foreach ($translators as $translator)
 
-                        <option value="{{ $t->id }}">{{ $t->name }}</option>
+                        <option value="{{ $translator->id }}">{{ $translator->name }}</option>
                       @endforeach
                     </select>
-                  </div>
+                  </div> --}}
 
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                   <label for="quantity">Book Quantity</label>
                   <br>
                   <input type="number" class="form-control" name="quantity" placeholder="Book Quantity" value="1" required>
-                </div>
+                </div> --}}
 
 
 

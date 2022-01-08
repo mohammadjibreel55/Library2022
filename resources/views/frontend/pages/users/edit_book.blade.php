@@ -109,11 +109,11 @@
             </select>
           </div>
 
-          <div class="col-md-6">
+          {{-- <div class="col-md-6">
             <label for="quantity">Book Quantity</label>
               <br>
               <input type="number" name="quantity" id="quantity" class="form-control" value="{{ $book->quantity }}" required min="1">
-          </div>
+          </div> --}}
 
 
 

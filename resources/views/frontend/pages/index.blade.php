@@ -57,18 +57,16 @@
           <img src="assetsfront/img/about.jpg" class="img-fluid" alt="">
         </div>
         <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-          <h3>Welcome to Al- Balqa' Applied University  library</h3>
+          <h3>Welcome to Al- Balqa Applied University  library</h3>
           <p class="fst-italic">
             here we provide e-books for all students in all universities colleges
           </p>
           <ul>
             <li><i class="bi bi-check-circle"></i>You can exchange used books with other students</li>
             <li><i class="bi bi-check-circle"></i> Use the chat to communicate with other members</li>
-            <li><i class="bi bi-check-circle"></i> Search by college and major to find what you're looking for easily            </li>
+            <li><i class="bi bi-check-circle"></i> Search by categories, author, publisher or book name to easily find the book you're looking for            </li>
           </ul>
-          <p>
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-          </p>
+
 
         </div>
       </div>

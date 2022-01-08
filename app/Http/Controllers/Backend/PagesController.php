@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Book;
 use App\Category;
 use App\Author;
+use App\Models\Review;
 use App\Models\User;
 use App\Publisher;
 use App\Translator;
@@ -29,6 +30,9 @@ class PagesController extends Controller
         $total_Translators = count(Translator::all());
         $total_Users = count(User::all());
         $total_Admins = count(Admin::all());
-return view('backend.pages.index', compact('total_books', 'total_authors', 'total_publishers', 'total_categories','total_Translators','total_Users','total_Admins'));
+        $total_rating=count(Review::all());
+
+
+return view('backend.pages.index', compact('total_books', 'total_authors', 'total_publishers', 'total_categories','total_Translators','total_Users','total_Admins','total_rating'));
     }
 }

@@ -9,9 +9,11 @@ use App\Author;
 use App\Publisher;
 use App\Book;
 use App\BookAuthor;
+use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Translator;
+use Illuminate\Support\Facades\DB;
 
 class BooksController extends Controller
 {
@@ -21,10 +23,12 @@ class BooksController extends Controller
     {
 
     	$book = Book::where('slug', $slug)->first();
+       $review=Review::where('book_id',$book->id)->first();
+
 
 
     	if (!is_null($book)) {
-    		return view('frontend.pages.books.show', compact('book'));
+    		return view('frontend.pages.books.show', compact('book','review'));
     	}
     	return redirect()->route('index');
     }
@@ -34,9 +38,8 @@ class BooksController extends Controller
     	$categories = Category::all();
         $publishers = Publisher::all();
         $authors = Author::all();
-        $books = Book::where('is_approved', 1)->get();
+        $books = Book::where('is_approved', 1)->where('user_id',Auth::id())->first();
         $translators = Translator::all();
-
 
         return view('frontend.pages.books.create', compact('categories', 'publishers', 'authors', 'books','translators'));
     }
@@ -44,7 +47,10 @@ class BooksController extends Controller
     public function index()
     {
         $books = Book::orderBy('id', 'desc')->where('is_approved', 1)->paginate(10);
-        return view('frontend.pages.books.index', compact('books'));
+        $Authors=Author::all();
+        $publishers=Publisher::all();
+        $categories=Category::all();
+        return view('frontend.pages.books.index', compact('books','Authors','publishers','categories'));
 
     }
 
@@ -98,6 +104,14 @@ class BooksController extends Controller
         foreach ($books as $book) {
             $book->increment('total_search');
         }
+        if(is_null($books)){
+            session()->flash('success', 'no result found');
+
+
+        }
+        elseif(!is_null($books)){
+        session()->flash('success', 'The  Result   Found');
+        }
 
         return view('frontend.pages.books.index', compact('books', 'searched'));
     }
@@ -139,7 +153,7 @@ class BooksController extends Controller
         $book->user_id = Auth::id();
         $book->is_approved = 0;
         $book->isbn = $request->isbn;
-        $book->quantity = $request->quantity;
+        $book->quantity = 1;
         $book->translator_id = $request->translator_id;
         $book->save();
 
@@ -172,8 +186,9 @@ class BooksController extends Controller
         }
 
 
-        session()->flash('success', 'Book has been created !!');
-        return redirect()->route('index');
+        session()->flash('success', 'The book has been downloaded and sent to the admin for review and approval  !!');
+         return back();
     }
+
 
 }

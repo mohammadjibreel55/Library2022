@@ -21,6 +21,8 @@
 
   <div class="book-show-area">
     <div class="container">
+        @include('frontend.layouts.partials.messages')
+
       <h3>
         Upload  Your Book
       </h3>
@@ -105,7 +107,7 @@
 
 
 
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                   <label for="translator_id">Book Translator</label>
                   <br>
                    <select name="translator_id" id="translator_id" class="form-control select2">
@@ -114,14 +116,14 @@
                       <option value="{{ $t->id }}">{{ $t->name }}</option>
                     @endforeach
                   </select>
-                </div>
+                </div> --}}
 
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                   <label for="quantity">Book Quantity</label>
                     <br>
                     <input type="number" name="quantity" id="quantity" class="form-control" value="1" required min="1">
                 </div>
-
+ --}}
 
 
                 <div class="col-12">
@@ -144,7 +146,6 @@
         </a>
         </p>
       </div>
-      <div style="margin-bottom:490px"></div>
 
       @endif
     </div>

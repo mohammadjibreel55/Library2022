@@ -21,6 +21,7 @@ class CreateBooksTable extends Migration
             $table->string('publish_year')->nullable();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
+            $table->string('bookFile')->nullable();
 
             $table->boolean('is_approved')->default(0);
             $table->unsignedInteger('total_view')->default(0);
@@ -31,8 +32,8 @@ class CreateBooksTable extends Migration
             $table->unsignedInteger('category_id')->index();
             $table->unsignedInteger('publisher_id')->index();
             $table->unsignedInteger('translator_id')->nullable()->index();
-            
-            $table->integer('qauntity')->default(1);
+
+            // $table->integer('qauntity')->default(1);
             $table->timestamps();
         });
     }

@@ -2,12 +2,20 @@
 
 namespace App;
 
-use App\BookAuthor as AppBookAuthor;
+use App\BookAuthor;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\Category;
+use App\Models\BookTranslator;
+use App\Models\Review;
+use App\Models\Wishlist;
+
 class Book extends Model
 
 {
+    protected $table="books";
+
+
     public function category()
     {
     	return $this->belongsTo(Category::class);
@@ -27,6 +35,14 @@ class Book extends Model
     {
         return $this->hasMany(BookAuthor::class);
     }
+    public function reviews() {
+        return $this->hasMany(Review::class);
+
+    }
+    public function wishlists() {
+        return $this->hasMany(Review::class);
+
+    }
 
 
     /**
@@ -38,8 +54,17 @@ class Book extends Model
      */
     public static function isAuthorSelected($book_id, $author_id)
     {
-        $book_author = AppBookAuthor::where('book_id', $book_id)->where('author_id', $author_id)->first();
+        $book_author = BookAuthor::where('book_id', $book_id)->where('author_id', $author_id)->first();
         if (!is_null($book_author)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function isTranslatorSelected($book_id, $translator_id)
+    {
+        $book_translator = BookTranslator::where('book_id', $book_id)->where('translator_id', $translator_id)->first();
+        if (!is_null($book_translator)) {
             return true;
         }
         return false;

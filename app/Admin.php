@@ -18,6 +18,10 @@ class Admin extends Authenticatable
      *
      * @var array
      */
+    public function reviews() {
+        return $this->hasMany(Review::class);
+
+     }
     protected $fillable = [
         'username', 'email', 'password', 'name', 'phone_no', 'address', 'status'
     ];

@@ -25,6 +25,6 @@ class UsersController extends Controller
     	}
     	return redirect()->route('index');
     }
-
+      
 
 }

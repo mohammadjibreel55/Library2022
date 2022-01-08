@@ -13,6 +13,7 @@
         <form action="{{ route('admin.books.update', $book->id) }}" method="post" enctype="multipart/form-data">
               @csrf
 
+
               <div class="row">
                 <div class="col-md-6">
                   <label for="">Book Title</label>
@@ -93,17 +94,17 @@
                   <br>
                    <select name="translator_id" id="translator_id" class="form-control select2">
                     <option value="">Select a translator book</option>
-                    @foreach ($books as $tb)
-                      <option value="{{ $tb->id }}" {{ $tb->id == $book->translator_id ? 'selected' : '' }}>{{ $tb->title }}</option>
-                    @endforeach
+                    @foreach ($translators as $translator)
+                    <option value="{{ $translator->id }}"  {{ $book->translator_id ==  $translator->id ? 'selected' : ''}}>{{ $translator->name }}</option>
+                  @endforeach
                   </select>
                 </div>
 
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                   <label for="quantity">Book Quantity</label>
                   <br>
                   <input type="number" class="form-control" name="quantity" placeholder="Book Quantity" value="{{ $book->quantity }}" required>
-                </div>
+                </div> --}}
 
 
 

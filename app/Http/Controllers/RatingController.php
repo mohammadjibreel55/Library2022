@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class RatingController extends Controller
 {
@@ -18,27 +22,24 @@ class RatingController extends Controller
 	}
 
 
-    public function add(Request $request )
-    {
-        Review::create([
-        'product_rating'=>$request->input('product_rating') ,
-        'comment'=>$request->comment,
-        'book_id'=>$request->book_id,
-        'user_id'=>$request->user_id,
-        ]);
-        session()->flash('success', 'book rated successfully');
-        return back();
 
-    }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($request)
     {
-        //
+
+        $Review = $request->all();
+
+        Review::create($Review);
+
+        Session::flash('flash_message', 'Task successfully added!');
+
+
     }
 
     /**
@@ -49,7 +50,20 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Review::updateOrCreate([
+            'product_rating'=>$request->product_rating,
+            'comment'=>$request->comment,
+            'book_id'=>$request->book_id,
+            'user_id'=>Auth::id(),
+            'status'=>1
+
+            ]);
+        // Review::updateOrCreate($request->all());
+
+
+
+            session()->flash('success', 'book rated successfully');
+            return back();
     }
 
     /**
@@ -58,9 +72,15 @@ class RatingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+
+        $rating = auth()->user()->reviews()->with("book")->get();
+
+
+
+
+        return view('frontend.pages.rating.show',compact('rating'));
     }
 
     /**
@@ -69,9 +89,11 @@ class RatingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id,Request $request)
     {
-        //
+
+
+
     }
 
     /**
@@ -81,10 +103,28 @@ class RatingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id,Request $request)
     {
-        //
+
+
+        $task = Review::findOrFail($id);
+
+
+
+        $input = $request->all();
+
+        $task->fill($input)->save();
+
+
+
+
+
+            session()->flash('success', 'book update rating successfully');
+            return redirect()->back();
+
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -94,6 +134,9 @@ class RatingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $rating = Review::find($id);
+        $rating->delete();
+        session()->flash('success', 'rating has been deleted !!');
+        return back();
     }
 }

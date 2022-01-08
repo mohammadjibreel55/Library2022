@@ -104,6 +104,7 @@
           <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Book Title/Description</label>
+
                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Book Title/Description" name="t">
               </div>
           </div>
@@ -118,9 +119,7 @@
                 <label for="exampleInputEmail1">Publication</label>
                 <select class="form-control" name="p">
                   <option value="">Select a publisher</option>
-                  {{-- @foreach ($publishers as $pub)
-                    <option value="{{ $pub->id }}">{{ $pub->name }}</option>
-                  @endforeach --}}
+
                 </select>
               </div>
           </div>
@@ -129,9 +128,7 @@
                 <label for="exampleInputEmail1">Book Category</label>
                 <select class="form-control" name="c">
                   <option value="">Select a category</option>
-                  {{-- @foreach ($categories as $cat)
-                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
-                  @endforeach --}}
+
                 </select>
               </div>
           </div>
@@ -154,8 +151,9 @@
         <div class="col-md-9">
           <h3>Recent Uploaded Books</h3>
 
-          @include('frontend.pages.books.partials.list')
+          @include('frontend.layouts.partials.messages')
 
+          @include('frontend.pages.books.partials.list')
           <div class="books-pagination mt-5">
 
           </div>

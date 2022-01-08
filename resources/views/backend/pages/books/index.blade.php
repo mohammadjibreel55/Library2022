@@ -26,9 +26,10 @@
                     <th>URL</th>
                     <th>Category</th>
                     <th>Publisher</th>
-                    <th>Statistics</th>
+                    <th >Statistics</th>
+                    <th>Preview</th>
                     <th>Status</th>
-                    <th>Manage</th>
+                    <th colspan="4">Manage</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -51,6 +52,11 @@
                      <br>
                      <i class="fa fa-search"></i> {{ $book->total_search }}
                     </td>
+
+                    <td>
+                        <a class="btn btn-primary" target="_blank" href="{{ asset('b/books/'.$book->bookFile) }}">Show</a>
+
+                    </td>
                     <td>
 
 
@@ -65,7 +71,7 @@
                         @else
                         <form action="{{ route('admin.books.unapprove', $book->id) }}" method="post">
                             @csrf
-                            <button type="submit" class="btn btn-danger">
+                            <button type="submit" class="btn btn-danger md-sm">
                               <i class="fa fa-check"></i> UnApprove
                             </button>
                           </form>
@@ -87,7 +93,7 @@
                     <td>
                       <a href="{{ route('admin.books.edit', $book->id) }}" class="btn btn-success" ><i class="fa fa-edit"></i></a>
 
-                      <a href="#deleteModal{{ $book->id }}" class="btn btn-danger" data-toggle="modal"><i class="fa fa-trash"></i></a>
+                      <a href="#deleteModal{{ $book->id }}" class="btn btn-danger p-1" data-toggle="modal"><i class="fa fa-trash"></i></a>
                     </td>
                   </tr>
 

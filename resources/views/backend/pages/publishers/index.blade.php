@@ -7,7 +7,7 @@
 
       <a href="#addModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal"><i class="fas fa-plus-circle fa-sm text-white-50" ></i> Add Publisher</a>
     </div>
-    
+
     @include('backend.layouts.partials.messages')
 
     <!-- Add Modal -->
@@ -21,7 +21,7 @@
             </button>
           </div>
           <div class="modal-body">
-            
+
             <form action="{{ route('admin.publishers.store') }}" method="post">
               @csrf
 
@@ -35,18 +35,18 @@
                   <label for="">Publisher Link</label>
                   <br>
                   <input type="text" class="form-control" name="link" placeholder="Publisher Link">
-                </div> 
+                </div>
 
                 <div class="col-md-6">
                   <label for="">Publisher Address</label>
                   <br>
                   <input type="text" class="form-control" name="address" placeholder="Publisher Address">
                 </div>
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                   <label for="">Publisher Outlet</label>
                   <br>
                   <input type="text" class="form-control" name="outlet" placeholder="Publisher Outlet">
-                </div>
+                </div> --}}
                 <div class="col-12">
                   <label for="">Publisher Details</label>
                   <br>
@@ -61,7 +61,7 @@
             </form>
 
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -74,7 +74,7 @@
               <h6 class="m-0 font-weight-bold text-primary">Publisher Lists</h6>
             </div>
             <div class="card-body">
-              
+
               <table class="table" id="dataTable">
                 <thead>
                   <tr>
@@ -82,7 +82,7 @@
                     <th>Name</th>
                     <th>Link</th>
                     <th>Address</th>
-                    <th>Outlet</th>
+                    <th></th>
                     <th>Manage</th>
                   </tr>
                 </thead>
@@ -112,7 +112,7 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          
+
                           <form action="{{ route('admin.publishers.update', $publisher->id) }}" method="post">
                             @csrf
 
@@ -126,18 +126,18 @@
                                 <label for="">Publisher Link</label>
                                 <br>
                                 <input type="text" class="form-control" name="link" placeholder="Publisher Link"  value="{{ $publisher->link }}">
-                              </div> 
+                              </div>
 
                               <div class="col-md-6">
                                 <label for="">Publisher Address</label>
                                 <br>
                                 <input type="text" class="form-control" name="address" placeholder="Publisher Address"  value="{{ $publisher->address }}">
                               </div>
-                              <div class="col-md-6">
+                              {{-- <div class="col-md-6">
                                 <label for="">Publisher Outlet</label>
                                 <br>
                                 <input type="text" class="form-control" name="outlet" placeholder="Publisher Outlet"  value="{{ $publisher->outlet }}">
-                              </div>
+                              </div> --}}
                               <div class="col-12">
                                 <label for="">Publisher Details</label>
                                 <br>
@@ -151,7 +151,7 @@
                           </form>
 
                         </div>
-                        
+
                       </div>
                     </div>
                   </div>
@@ -168,7 +168,7 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          
+
                           <form action="{{ route('admin.publishers.delete', $publisher->id) }}" method="post">
                             @csrf
 
@@ -183,7 +183,7 @@
                           </form>
 
                         </div>
-                        
+
                       </div>
                     </div>
                   </div>

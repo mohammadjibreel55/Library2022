@@ -84,8 +84,8 @@
                         @csrf
                     </form>
                    @else
-                  <a class="dropdown-item" href="{{ route('login') }}">Sign In</a>
-                  <a class="dropdown-item" href="{{ route('register') }}">Sign Up</a>
+                  <a class="dropdown-item" href="{{ route('login') }}">Log In</a>
+                  <a class="dropdown-item" href="{{ route('register') }}">Register</a>
                     @endif
 
 

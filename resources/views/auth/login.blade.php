@@ -22,6 +22,12 @@
               <h3 class="mb-4 text-center">Have an account?</h3>
               <form method="POST" action="{{ route('login') }}">
                 @csrf
+                @if (request()->has('callbackUrl'))
+                <input type="hidden" name="redirect" value="{{request()->callbackUrl}}">
+
+
+                @endif
+
                          <div class="form-group">
                       <input type="text" class="form-control item @error('email') is-invalid @enderror" name="email" required autocomplete="current-password" placeholder="Enter your email" required>
                       @error('email')

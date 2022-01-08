@@ -13,6 +13,7 @@
                 My Uploaded Books
               </h3>
               <hr>
+              @include('frontend.layouts.partials.messages')
 
               <div>
                 @include('frontend.pages.books.partials.list')

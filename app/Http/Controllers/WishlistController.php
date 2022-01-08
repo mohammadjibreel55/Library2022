@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class WishlistController extends Controller
 {
@@ -20,17 +19,17 @@ class WishlistController extends Controller
 
     public function index()
     {
-        $wishlist = Wishlist::orderBy('id', 'desc')->get();
+        // $wishlists = Wishlist::orderBy('id', 'desc')->distinct()->get();
 
 
 
-               $wishlist_books = DB::table('books')
-               ->select('books.id','title','image','slug')
-               ->Join('wishlists', 'books.id', '=', 'wishlists.book_id')
-               ->orderBy('books.id', 'ASC')->distinct()->get();
+            //    $wishlist_books = DB::table('books')
+            //    ->select('books.id','title','image','slug')
+            //    ->Join('wishlists', 'books.id', '=', 'wishlists.book_id')
+            //    ->orderBy('books.id', 'ASC')->distinct()->get();
+            $wishlist = auth()->user()->wishlists()->with("book")->get();
 
-
-        return view('frontend.pages.wishlist.index',compact('wishlist_books'));
+        return view('frontend.pages.wishlist.index',compact('wishlist'));
 
     }
 
@@ -50,13 +49,18 @@ class WishlistController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($book_id)
+    public function store($book_id,Request $request)
     {
-        Wishlist::create([
+
+
+
+
+        Wishlist::updateorCreate([
 
             'book_id'=>$book_id,
             'user_id'=>auth()->user()->id
             ]);
+
             session()->flash('success', 'book added successfully to wishlist page');
             return back();
 
@@ -102,8 +106,13 @@ class WishlistController extends Controller
      * @param  \App\Models\Wishlist  $wishlist
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Wishlist $wishlist)
+    public function destroy($id)
     {
-        //
+
+      $wishlist=Wishlist::findOrFail($id);
+      $wishlist->delete();
+
+        session()->flash('success', "wishlist book  has been deleted !!");
+        return back();
     }
 }

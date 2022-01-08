@@ -7,7 +7,7 @@
 
       <a href="#addModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal"><i class="fas fa-plus-circle fa-sm text-white-50" ></i> Add Author</a>
     </div>
-    
+
     @include('backend.layouts.partials.messages')
 
     <!-- Add Modal -->
@@ -21,7 +21,7 @@
             </button>
           </div>
           <div class="modal-body">
-            
+
             <form action="{{ route('admin.authors.store') }}" method="post">
               @csrf
 
@@ -45,7 +45,7 @@
             </form>
 
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -58,13 +58,13 @@
               <h6 class="m-0 font-weight-bold text-primary">Author Lists</h6>
             </div>
             <div class="card-body">
-              
+
               <table class="table" id="dataTable">
                 <thead>
                   <tr>
                     <th>Sl</th>
                     <th>Name</th>
-                    <th>Link</th>
+                    <th>description</th>
                     <th>Manage</th>
                   </tr>
                 </thead>
@@ -73,7 +73,7 @@
                   <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $author->name }}</td>
-                    <td>{{ $author->link }}</td>
+                    <td>{{ $author->description }}</td>
                     <td>
                       <a href="#editModal{{ $author->id }}" class="btn btn-success" data-toggle="modal"><i class="fa fa-edit"></i> Edit</a>
 
@@ -92,7 +92,7 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          
+
                           <form action="{{ route('admin.authors.update', $author->id) }}" method="post">
                             @csrf
 
@@ -116,7 +116,7 @@
                           </form>
 
                         </div>
-                        
+
                       </div>
                     </div>
                   </div>
@@ -133,7 +133,7 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          
+
                           <form action="{{ route('admin.authors.delete', $author->id) }}" method="post">
                             @csrf
 
@@ -148,7 +148,7 @@
                           </form>
 
                         </div>
-                        
+
                       </div>
                     </div>
                   </div>

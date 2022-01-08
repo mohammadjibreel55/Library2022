@@ -177,9 +177,16 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [HomeController::class,'index'])->name('home');
 
-Route::post('add-rating',[RatingController::class,'add'])->name('addRating');
+Route::post('add-rating',[RatingController::class,'store'])->name('addRating');
+Route::post('update-rating/{id}',[RatingController::class,'update'])->name('updateRating');
+
 Route::get('show-rating',[BackEndRatingController::class,'index'])->name('showRating');
+Route::get('rating',[RatingController::class,'show'])->name('Rating');
 
 Route::post('delete-rating/{id}',[BackEndRatingController::class,'destroy'])->name('deleteRating');
+Route::get('deleteRating/{id}',[RatingController::class,'destroy'])->name('DeleteRating');
+
 Route::get('show-wish/{book_id}',[WishlistController::class,'store'])->name('wish');
 Route::get('wishlist',[WishlistController::class,'index'])->name('wishlistShow');
+
+Route::get('wishlist/delete/{id}',[WishlistController::class,'destroy'])->name('wishlist.delete');

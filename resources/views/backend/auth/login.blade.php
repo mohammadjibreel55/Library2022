@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5">
-                <h2 class="heading-section">Login Admin</h2>
+                <h2 class="heading-section">Admin Login Page</h2>
                 @if (Session::has('login_error'))
                 <div class="alert alert-danger">
                   {{ Session::get('login_error') }}
@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
 
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="please enter your email address">
 
                     @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -39,7 +39,7 @@
                   </div>
                   <div class="form-group">
                     <label for="password">Password</label>
-                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="please enter your password">
 
                         @error('password')
                             <span class="invalid-feedback" role="alert">

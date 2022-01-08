@@ -27,14 +27,14 @@
 
               <div class="row">
                 <div class="col-md-6">
-                  <label for="">First Name</label>
+                  <label for=""> Name</label>
                   <br>
-                  <input type="text" class="form-control" name="username" placeholder="First Name">
+                  <input type="text" class="form-control" name="name" placeholder="Name">
                 </div>
                 <div class="col-md-6">
-                    <label for="">Last  Name</label>
+                    <label for="">Username</label>
                     <br>
-                    <input type="text" class="form-control" name="name" placeholder="Last Name">
+                    <input type="text" class="form-control" name="username" placeholder="username">
                   </div>
                 <div class="col-md-6">
                   <label for="">User email</label>
@@ -80,7 +80,9 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Full Name</th>
+                    <th> Name</th>
+                    <th> Username</th>
+
                     <th>Email</th>
                     <th>phone number</th>
 
@@ -92,8 +94,9 @@
                 <tbody>
                   @foreach($Admins as $user)
                   <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $user->username }}  {{$user->name}}</td>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}  </td>
+                    <td>{{$user->username}}</td>
                     <td>{{ $user->email }}</td>
                     <th>{{$user->phone_no}}</th>
                     @if ($user->status==0)
@@ -145,20 +148,20 @@
 
                             <div class="row">
                               <div class="col-md-6">
-                                <label for=""> First Name</label>
+                                <label for="">  Name</label>
                                 <br>
-                                <input type="text" class="form-control" name="username" placeholder="First Name" value="{{ $user->username }}">
+                                <input type="text" class="form-control" name="name" placeholder="Name" value="{{ $user->name }}">
                               </div>
 
                               <div class="col-md-6">
-                                <label for="">Last Name</label>
+                                <label for="">User Name</label>
                                 <br>
-                                <input type="text" class="form-control" name="name" placeholder="Last Name" value="{{$user->name}}">
+                                <input type="text" class="form-control" name="username" placeholder="username" value="{{$user->username}}">
                               </div>
                               <div class="col-md-6">
                                 <label for="">User email</label>
                                 <br>
-                                <input type="text" class="form-control" name="email" placeholder="User Email"  value="{{ $user->email }}">
+                                <input type="email" class="form-control" name="email" placeholder="User Email"  value="{{ $user->email }}">
                               </div>
 
 

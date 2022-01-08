@@ -22,7 +22,7 @@
   @yield('content')
 
 
-<div style="margin-bottom:200px"></div>
+<div style="margin-bottom:450px"></div>
   @include('frontend.layouts.partials.footer')
 
 
